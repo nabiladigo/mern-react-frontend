@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import People from "../pages/People";
-import Show from "../pages/Show";
+import { useEffect, useState } from "react"
+import { Route, Switch } from "react-router-dom"
+import People from "../pages/People"
+import Show from "../pages/Show"
 
 function Main(props) {
     const [people, setPeople] = useState(null)
@@ -53,23 +53,24 @@ function Main(props) {
 
     return (
         <main>
-            <Routes>
-                <Route exact path="/" element = {<People people={people} createPeople={createPeople} />} />
-              
+            <Switch>
+                <Route exact path="/">
+                    <People people={people} createPeople={createPeople} />
+                </Route>
                 <Route
                     path="/people/:id"
-                    render={(rp) => (
-                        <Show element={ <People
-                        people={people}
-                        updatePeople={updatePeople}
-                        deletePeople={deletePeople}
-                        {...rp} />} 
-                    />
+                    render={rp => (
+                        <Show
+                            people={people}
+                            updatePeople={updatePeople}
+                            deletePeople={deletePeople}
+                            {...rp}
+                        />
                     )}
                 />
-            </Routes>
+            </Switch>
         </main>
-    );
+    )
 }
 
-export default Main;
+export default Main
